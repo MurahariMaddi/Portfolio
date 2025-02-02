@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murahari Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --primary-color: #58a6ff;
+            --hover-color: #1f6feb;
+        }
+        .light-theme {
+            --bg-color: #ffffff;
+            --text-color: #0d1117;
+            --primary-color: #007bff;
+            --hover-color: #0056b3;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent bottom scroll bar */
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .header a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+        .theme-toggle {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            margin-left: 20px;
+            margin-right: 25px;
+            transition: color 0.3s;
+        }
+        .left-section {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            text-align: center;
+            padding: 10px;
+        }
+        .left-section div {
+            margin-bottom: 10px;
+        }
+        .right-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 18%;
+            transform: translateY(-25%);
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            color: var(--text-color);
+        }
+        .right-sidebar h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .social-icons {
+            font-size: 20px;
+            display: flex;
+            gap: 25px;
+        }
+        .content {
+            margin-top: 70px;
+            margin-left: 120px;
+            margin-right: 50px;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .back-to-top {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-color);
+            display: block;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .project-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .project-card h3 {
+            margin-top: 10px;
+            color: var(--primary-color);
+        }
+        .project-card p {
+            color: var(--text-color);
+        }
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        #contact-form input, 
+        #contact-form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+            font-size: 16px;
+        }
+        #contact-form button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #contact-form button:hover {
+            background-color: var(--hover-color);
+        }
+        @keyframes textColorChange {
+        0% { color: var(--primary-color); }
+        50% { color: var(--hover-color); }
+        100% { color: var(--primary-color); }
+    }
+
+    @keyframes textFade {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    .home-title {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        animation: textColorChange 3s infinite alternate;
+        transition: color 0.3s;
+    }
+
+    .home-title span {
+        display: inline-block;
+        animation: textFade 5s infinite;
+    }
+    #experience {
+    background-color: var(--bg-color); /* Use the theme's background color */
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    color: var(--text-color); /* Ensure text color changes based on theme */
+}
+
+#experience h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--text-color); /* Ensure heading color changes based on theme */
+}
+
+.experience-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.experience-item {
+    margin-bottom: 30px;
+    color: var(--text-color); /* Ensure text color changes based on theme */
+}
+
+.experience-item h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color); /* Ensure primary color changes based on theme */
+}
+
+.experience-item p {
+    font-size: 1rem;
+    color: var(--text-color); /* Ensure text color changes based on theme */
+    line-height: 1.5;
+}
+
+.experience-timeline {
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* .experience-timeline ul li { */
+    /* font-size: 16px; Adjust the font size */
+    /* padding: 8px 0;  Adjust the padding for spacing */
+    /* margin: 4px 0;   Adjust the margin for spacing between items */
+/* } */
+
+.timeline-item {
+    background-color: var(--bg-color); /* Ensure the background color changes with the theme */
+    color: var(--text-color); /* Ensure text color changes based on theme */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-10px);
+}
+
+.timeline-item h4 {
+    font-size: 1.2rem;
+    color: var(--text-color); /* Ensure text color changes based on theme */
+    margin-bottom: 10px;
+}
+
+.timeline-item h5 {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.timeline-item ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.timeline-item ul li {
+    font-size: 1rem;
+    color: var(--text-color); /* Ensure text color changes based on theme */
+    margin-bottom: 5px;
+}
+
+.timeline-item ul li::before {
+    content: "✔️ ";
+    color: #28a745;
+}
+p {
+    font-size: 1.2rem; /* Larger font size */
+    line-height: 1.8; /* Increased line height for better spacing */
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </div>
+
+    <div class="left-section">
+        <div>🎯</div>
+        <div>👨‍💻</div>
+        <div>☕</div>
+        <div>📜</div>
+    </div>
+
+    <div class="right-sidebar">
+        <h1>Murahari Maddi</h1>
+        <p>Code. Deploy. Innovate.</p>
+        <h3>Stay Connected</h3>
+        <div class="social-icons">
+            <a href="mailto:maddimurahari12@gmail.com">📧</a>
+            <a href="https://www.linkedin.com/in/murahari-maddi/" target="_blank">🔗</a>
+            <a href="https://github.com/MurahariMaddi" target="_blank">🐙</a>
+            <a href="https://medium.com/@muraharimaddi" target="_blank">📝</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <section id="home">
+            <h1 class="home-title">
+                <span>Welcome to My Digital Playground</span>
+            </h1>
+        </section>
+        
+        <section id="about">
+            <h2>Who I Am</h2>
+            <p>Hey there! I’m a passionate Java Full Stack Developer who thrives on building scalable, responsive, and innovative software solutions. I specialize in modern frameworks, cloud integration, and microservices, with a strong focus on technologies like Java 18, Spring Boot, ReactJS, and AWS. My goal is to leverage technology to craft meaningful user experiences and solve real-world challenges, always aiming for performance, efficiency, and elegance in every project I take on.</p>
+        </section>        
+        <section id="skills">
+            <h2>Skills</h2>
+            <p><strong>Programming Languages:</strong> Java (8+), SQL</p>
+            <p><strong>Backend Technologies:</strong> Spring Boot, Microservices, Hibernate, RESTful APIs</p>
+            <p><strong>Frontend Technologies:</strong> HTML, CSS, JavaScript, React, Angular</p>
+            <p><strong>Cloud & DevOps:</strong> AWS, Docker, Kubernetes</p>
+            <p><strong>Databases:</strong> Oracle, MySQL, MongoDB</p>
+            <p><strong>Build & CI/CD Tools:</strong> Maven, Jenkins, Git</p>
+            <p><strong>Testing & Monitoring:</strong> JUnit, Selenium, Postman, Mockito</p>
+        </section>
+        
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-container">
+                <div class="experience-item">
+                    <h3>Delivering End-to-End Solutions Across the Full Software Development Lifecycle</h3>
+                    <p>Building scalable, high-performance web applications across various industries. Passionate about leveraging the latest technologies to create meaningful user experiences.</p>
+                </div>
+                <div class="experience-timeline">
+                    <div class="timeline-item">
+                        <h4>Sr. Java Full Stack Developer | Dell, MA</h4>
+                        <p><strong>June 2023 - Present</strong></p>
+                        <h5>Project: Cloud Pulse (Real-Time Performance Monitor)</h5>
+                        <ul>
+                            <li>Developed a real-time application performance dashboard using Spring Boot, ReactJS, and AWS to monitor cloud-deployed applications.</li>
+                            <li>Integrated Apache Kafka for API communication and OAuth 2.0 for secure authentication.</li>
+                            <li>Created RESTful APIs with Node.js and MongoDB, deployed in Docker and Kubernetes containers.</li>
+                            <li>Leveraged Jenkins for CI/CD and Grafana for metrics visualization, enhancing system reliability and proactive issue resolution.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Sr. Java Full Stack Developer | Evernorth, Austin, TX</h4>
+                        <p><strong>April 2021 - May 2023</strong></p>
+                        <h5>Project: MedShield Data Exchange (Safe Health Data Sharing)</h5>
+                        <ul>
+                            <li>Engineered secure data exchange solutions using Kafka, Spring Boot, and AWS to protect sensitive health data while enabling seamless collaboration.</li>
+                            <li>Developed a Single Page Application (SPA) with AngularJS, ReactJS, and jQuery, improving user experience.</li>
+                            <li>Implemented database optimization strategies for PostgreSQL and leveraged AWS services for efficient cloud storage and management.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Java Developer | Health Mart Systems Inc., San Francisco, CA</h4>
+                        <p><strong>January 2020 - March 2021</strong></p>
+                        <h5>Project: MedGuardian (Smart Medication Tracker)</h5>
+                        <ul>
+                            <li>Built a medication tracking solution using J2EE, Spring MVC, and Hibernate, promoting patient engagement and medication adherence.</li>
+                            <li>Integrated AWS S3 for secure storage and implemented dynamic web applications with AJAX, jQuery, and AngularJS.</li>
+                            <li>Utilized Elasticsearch for data indexing and visualization, enhancing data retrieval performance.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Java/J2EE Developer | Bank of The West, San Francisco, CA</h4>
+                        <p><strong>June 2018 - November 2019</strong></p>
+                        <h5>Project: SmartBank AI (Intelligent Customer Support Chatbot)</h5>
+                        <ul>
+                            <li>Developed an AI-powered chatbot using Struts MVC, JSP, and JavaScript to enhance customer support in the banking sector.</li>
+                            <li>Implemented microservices architecture with Kubernetes and OpenShift, streamlining application deployment.</li>
+                            <li>Optimized system performance using JDBC, Junit, and DevOps tools for continuous integration.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Java Developer | Tvisha Technologies, Hyderabad, IN</h4>
+                        <p><strong>April 2016 - June 2018</strong></p>
+                        <h5>Project: Integrated Business Hub (Enterprise Resource Management System)</h5>
+                        <ul>
+                            <li>Developed a centralized ERP system with MVC architecture, integrating inventory, finance, HR, and procurement.</li>
+                            <li>Utilized JSP, Servlets, and JavaBeans for frontend and backend development, optimizing business processes.</li>
+                            <li>Handled deployment on Apache Tomcat and performed production support and bug fixes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <p>Bachelor's in Computer Science and Engineering.</p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <!-- <img src="cloud-pulse.jpg" alt="Cloud Pulse"> -->
+                    <h3>Cloud Pulse</h3>
+                    <p>A real-time dashboard that monitors the performance and health of cloud applications, integrates with Spring Boot, Apache Kafka, and AWS, enabling teams to track metrics, identify bottlenecks, and ensure system reliability.</p>
+                </div>
+                <div class="project-card">
+                    <!-- <img src="medshield.jpg" alt="MedShield Data Exchange"> -->
+                    <h3>MedShield Data Exchange</h3>
+                    <p>A secure platform for transferring sensitive health data across organizations, utilizing Spring Boot, Kafka, and AWS for encryption, authentication, and seamless data sharing while ensuring patient privacy.</p>
+                </div>
+                <div class="project-card">
+                    <!-- <img src="medguardian.jpg" alt="MedGuardian"> -->
+                    <h3>MedGuardian</h3>
+                    <p>An application designed to improve patient medication adherence through timely reminders and alerts, integrating with pharmacies to track prescriptions and enhance patient engagement and health outcomes.</p>
+                </div>
+                <div class="project-card">
+                    <!-- <img src="smartbank-ai.jpg" alt="SmartBank AI"> -->
+                    <h3>SmartBank AI</h3>
+                    <p>AI-powered chatbot developed to provide instant, personalized banking assistance, resolve customer issues, and offer financial insights by integrating into banking platforms using J2EE and Struts.</p>
+                </div>
+                <div class="project-card">
+                    <!-- <img src="integrated-business-hub.jpg" alt="Integrated Business Hub"> -->
+                    <h3>Integrated Business Hub</h3>
+                    <p>A centralized platform integrating business functions like inventory, HR, and finance. It streamlines workflows and automates processes, improving productivity and data synchronization across departments.</p>
+                </div>
+            </div>
+        </section>
+        
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-content">
+                <h2>Contact</h2>
+                <form id="contact-form" action="https://formspree.io/f/mpwqrabl" method="POST">    
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+    <p>© 2025 Murahari Maddi</p>
+    <div class="back-to-top" onclick="scrollToTop()">⬆️</div>
+</footer>
+
+    <script>
+        function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+
+    // Toggle light-theme class
+    body.classList.toggle("light-theme");
+
+    // Change the icon based on the theme
+    if (body.classList.contains("light-theme")) {
+        button.textContent = "☀️";  // Light theme icon
+    } else {
+        button.textContent = "🌙";  // Dark theme icon
+    }
+}
+
+
+        function scrollToTop() {
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>

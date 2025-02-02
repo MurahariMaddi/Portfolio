@@ -287,6 +287,47 @@ p {
     font-size: 1.2rem; /* Larger font size */
     line-height: 1.8; /* Increased line height for better spacing */
 }
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .left-section {
+        display: none; /* Hide left icons on small screens */
+    }
+
+    .right-sidebar {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .content {
+        margin: 0 auto;
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-toggle {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .back-to-top {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .experience-container {
+        padding: 10px;
+    }
+}
 
     </style>
 </head>

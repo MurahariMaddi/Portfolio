@@ -288,59 +288,59 @@ p {
     line-height: 1.8; /* Increased line height for better spacing */
 }
 @media screen and (max-width: 768px) {
-    /* Preventing horizontal overflow */
+    /* Prevent horizontal overflow */
     body, html {
         overflow-x: hidden;
         max-width: 100%;
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
     }
 
-    /* Updating header to be horizontal */
+    /* Update header to fit within mobile screen */
     .header {
         display: flex;
         flex-direction: row; /* Horizontal alignment */
-        justify-content: space-between; /* Space between header elements */
-        align-items: center; /* Vertically center align */
+        justify-content: space-between; /* Space between header items */
+        align-items: center; /* Center items vertically */
         padding: 10px;
         width: 100%;
+        box-sizing: border-box; /* Ensure padding is within width */
+        overflow: hidden; /* Hide overflow */
     }
 
     .left-section {
         display: none; /* Hide left icons on small screens */
     }
 
-    /* Right sidebar changes for better mobile view */
     .right-sidebar {
         position: static;
         text-align: center;
-        margin-top: 20px;
+        margin-top: 40px;
     }
 
-    /* Content area adjustments for mobile */
+    /* Ensure the content is properly aligned and doesn't cause overflow */
     .content {
         margin: 0 auto;
         padding: 15px;
         max-width: 100%;
-        box-sizing: border-box; /* Ensure padding doesn't exceed width */
+        box-sizing: border-box; /* Prevents overflow due to padding */
     }
 
-    /* Adjusting grid layout for mobile */
+    /* Adjust grid layout for mobile */
     .projects-grid {
         grid-template-columns: 1fr; /* One column grid for mobile */
     }
 
-    /* Theme toggle adjustment */
     .theme-toggle {
         margin-left: 0;
         margin-top: 10px;
     }
 
-    /* Back-to-top button positioning */
     .back-to-top {
         bottom: 10px;
         right: 10px;
     }
 
-    /* Experience container padding */
     .experience-container {
         padding: 10px;
     }

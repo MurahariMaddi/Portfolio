@@ -288,48 +288,64 @@ p {
     line-height: 1.8; /* Increased line height for better spacing */
 }
 @media screen and (max-width: 768px) {
+    /* Preventing horizontal overflow */
+    body, html {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    /* Updating header to be horizontal */
     .header {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-direction: row; /* Horizontal alignment */
+        justify-content: space-between; /* Space between header elements */
+        align-items: center; /* Vertically center align */
         padding: 10px;
+        width: 100%;
     }
 
     .left-section {
         display: none; /* Hide left icons on small screens */
     }
 
+    /* Right sidebar changes for better mobile view */
     .right-sidebar {
         position: static;
         text-align: center;
         margin-top: 20px;
     }
 
+    /* Content area adjustments for mobile */
     .content {
         margin: 0 auto;
         padding: 15px;
         max-width: 100%;
+        box-sizing: border-box; /* Ensure padding doesn't exceed width */
     }
 
+    /* Adjusting grid layout for mobile */
     .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* One column grid for mobile */
     }
 
+    /* Theme toggle adjustment */
     .theme-toggle {
         margin-left: 0;
         margin-top: 10px;
     }
 
+    /* Back-to-top button positioning */
     .back-to-top {
         bottom: 10px;
         right: 10px;
     }
 
+    /* Experience container padding */
     .experience-container {
         padding: 10px;
     }
 }
-
-    </style>
+</style>
 </head>
 <body>
 

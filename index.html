@@ -289,9 +289,11 @@ p {
 }
 @media screen and (max-width: 768px) {
     .header {
-        flex-direction: row;
-        align-items: stretch;
+        flex-direction: column;
+        align-items: center;
         padding: 10px;
+        height: auto; /* Ensures the header doesn't take up excess space */
+        justify-content: flex-start; /* Ensures the content starts at the top */
     }
 
     .left-section {
@@ -299,9 +301,9 @@ p {
     }
 
     .right-sidebar {
-        position: relative; /* Adjust positioning to control flow better */
-        margin-top: 10px; /* Reduce margin for mobile screens */
-        width: 100%; /* Ensure it takes full width on mobile */
+        position: static;
+        text-align: center;
+        margin-top: 20px;
     }
 
     .content {
@@ -328,7 +330,66 @@ p {
         padding: 10px;
     }
 }
-</style>
+@media screen and (max-width: 768px) {
+    /* Preventing horizontal overflow */
+    body, html {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    /* Updating header to be horizontal */
+    .header {
+        display: flex;
+        flex-direction: row; /* Horizontal alignment */
+        justify-content: space-between; /* Space between header elements */
+        align-items: center; /* Vertically center align */
+        padding: 10px;
+        width: 100%;
+    }
+
+    .left-section {
+        display: none; /* Hide left icons on small screens */
+    }
+
+    /* Right sidebar changes for better mobile view */
+    .right-sidebar {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Content area adjustments for mobile */
+    .content {
+        margin: 0 auto;
+        padding: 15px;
+        max-width: 100%;
+        box-sizing: border-box; /* Ensure padding doesn't exceed width */
+    }
+
+    /* Adjusting grid layout for mobile */
+    .projects-grid {
+        grid-template-columns: 1fr; /* One column grid for mobile */
+    }
+
+    /* Theme toggle adjustment */
+    .theme-toggle {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    /* Back-to-top button positioning */
+    .back-to-top {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    /* Experience container padding */
+    .experience-container {
+        padding: 10px;
+    }
+}
+
+    </style>
 </head>
 <body>
 
@@ -382,7 +443,7 @@ p {
             <p><strong>Build & CI/CD Tools:</strong> Maven, Jenkins, Git</p>
             <p><strong>Testing & Monitoring:</strong> JUnit, Selenium, Postman, Mockito</p>
         </section>
-        
+
         <section id="experience">
             <h2>Experience</h2>
             <div class="experience-container">
@@ -392,55 +453,26 @@ p {
                 </div>
                 <div class="experience-timeline">
                     <div class="timeline-item">
-                        <h4>Sr. Java Full Stack Developer | Dell, MA</h4>
+                        <h4>Java Full Stack Developer | Dell, MA</h4>
                         <p><strong>June 2023 - Present</strong></p>
-                        <h5>Project: Cloud Pulse (Real-Time Performance Monitor)</h5>
-                        <ul>
-                            <li>Developed a real-time application performance dashboard using Spring Boot, ReactJS, and AWS to monitor cloud-deployed applications.</li>
-                            <li>Integrated Apache Kafka for API communication and OAuth 2.0 for secure authentication.</li>
-                            <li>Created RESTful APIs with Node.js and MongoDB, deployed in Docker and Kubernetes containers.</li>
-                            <li>Leveraged Jenkins for CI/CD and Grafana for metrics visualization, enhancing system reliability and proactive issue resolution.</li>
-                        </ul>
+                        
                     </div>
                     <div class="timeline-item">
-                        <h4>Sr. Java Full Stack Developer | Evernorth, Austin, TX</h4>
+                        <h4>Java Full Stack Developer | Evernorth, Austin, TX</h4>
                         <p><strong>April 2021 - May 2023</strong></p>
-                        <h5>Project: MedShield Data Exchange (Safe Health Data Sharing)</h5>
-                        <ul>
-                            <li>Engineered secure data exchange solutions using Kafka, Spring Boot, and AWS to protect sensitive health data while enabling seamless collaboration.</li>
-                            <li>Developed a Single Page Application (SPA) with AngularJS, ReactJS, and jQuery, improving user experience.</li>
-                            <li>Implemented database optimization strategies for PostgreSQL and leveraged AWS services for efficient cloud storage and management.</li>
-                        </ul>
+                        
                     </div>
                     <div class="timeline-item">
-                        <h4>Java Developer | Health Mart Systems Inc., San Francisco, CA</h4>
+                        <h4>Java Full Stack Developer | Health Mart Systems Inc., San Francisco, CA</h4>
                         <p><strong>January 2020 - March 2021</strong></p>
-                        <h5>Project: MedGuardian (Smart Medication Tracker)</h5>
-                        <ul>
-                            <li>Built a medication tracking solution using J2EE, Spring MVC, and Hibernate, promoting patient engagement and medication adherence.</li>
-                            <li>Integrated AWS S3 for secure storage and implemented dynamic web applications with AJAX, jQuery, and AngularJS.</li>
-                            <li>Utilized Elasticsearch for data indexing and visualization, enhancing data retrieval performance.</li>
-                        </ul>
                     </div>
                     <div class="timeline-item">
-                        <h4>Java/J2EE Developer | Bank of The West, San Francisco, CA</h4>
+                        <h4>Java Full Stack Developer | Bank of The West, San Francisco, CA</h4>
                         <p><strong>June 2018 - November 2019</strong></p>
-                        <h5>Project: SmartBank AI (Intelligent Customer Support Chatbot)</h5>
-                        <ul>
-                            <li>Developed an AI-powered chatbot using Struts MVC, JSP, and JavaScript to enhance customer support in the banking sector.</li>
-                            <li>Implemented microservices architecture with Kubernetes and OpenShift, streamlining application deployment.</li>
-                            <li>Optimized system performance using JDBC, Junit, and DevOps tools for continuous integration.</li>
-                        </ul>
                     </div>
                     <div class="timeline-item">
-                        <h4>Java Developer | Tvisha Technologies, Hyderabad, IN</h4>
+                        <h4>Java Full Stack Developer Intern | Tvisha Technologies, Hyderabad, IN</h4>
                         <p><strong>April 2016 - June 2018</strong></p>
-                        <h5>Project: Integrated Business Hub (Enterprise Resource Management System)</h5>
-                        <ul>
-                            <li>Developed a centralized ERP system with MVC architecture, integrating inventory, finance, HR, and procurement.</li>
-                            <li>Utilized JSP, Servlets, and JavaBeans for frontend and backend development, optimizing business processes.</li>
-                            <li>Handled deployment on Apache Tomcat and performed production support and bug fixes.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -448,41 +480,8 @@ p {
 
         <section id="education">
             <h2>Education</h2>
-            <p>Master of Science in Computer Science.</p>
+            <p>Master of Science in Computer Science @Clark University</p>
         </section>
-
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <!-- <img src="cloud-pulse.jpg" alt="Cloud Pulse"> -->
-                    <h3>Cloud Pulse</h3>
-                    <p>A real-time dashboard that monitors the performance and health of cloud applications, integrates with Spring Boot, Apache Kafka, and AWS, enabling teams to track metrics, identify bottlenecks, and ensure system reliability.</p>
-                </div>
-                <div class="project-card">
-                    <!-- <img src="medshield.jpg" alt="MedShield Data Exchange"> -->
-                    <h3>MedShield Data Exchange</h3>
-                    <p>A secure platform for transferring sensitive health data across organizations, utilizing Spring Boot, Kafka, and AWS for encryption, authentication, and seamless data sharing while ensuring patient privacy.</p>
-                </div>
-                <div class="project-card">
-                    <!-- <img src="medguardian.jpg" alt="MedGuardian"> -->
-                    <h3>MedGuardian</h3>
-                    <p>An application designed to improve patient medication adherence through timely reminders and alerts, integrating with pharmacies to track prescriptions and enhance patient engagement and health outcomes.</p>
-                </div>
-                <div class="project-card">
-                    <!-- <img src="smartbank-ai.jpg" alt="SmartBank AI"> -->
-                    <h3>SmartBank AI</h3>
-                    <p>AI-powered chatbot developed to provide instant, personalized banking assistance, resolve customer issues, and offer financial insights by integrating into banking platforms using J2EE and Struts.</p>
-                </div>
-                <div class="project-card">
-                    <!-- <img src="integrated-business-hub.jpg" alt="Integrated Business Hub"> -->
-                    <h3>Integrated Business Hub</h3>
-                    <p>A centralized platform integrating business functions like inventory, HR, and finance. It streamlines workflows and automates processes, improving productivity and data synchronization across departments.</p>
-                </div>
-            </div>
-        </section>
-        
         
         <!-- Contact Section -->
         <section id="contact">
@@ -518,8 +517,6 @@ p {
         button.textContent = "🌙";  // Dark theme icon
     }
 }
-
-
         function scrollToTop() {
             window.scrollTo(0, 0);
         }

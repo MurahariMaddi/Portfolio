@@ -1,527 +1,517 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murahari Portfolio</title>
-    <link rel="icon" type="image/png" href="Images/Portfolio.png">
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --primary-color: #58a6ff;
-            --hover-color: #1f6feb;
-        }
-        .light-theme {
-            --bg-color: #ffffff;
-            --text-color: #0d1117;
-            --primary-color: #007bff;
-            --hover-color: #0056b3;
-        }
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
-            transition: background 0.3s, color 0.3s;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden; /* Prevent bottom scroll bar */
-        }
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--bg-color);
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 15px 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        .header a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-size: 16px;
-            font-weight: bold;
-            margin-left: 20px;
-            transition: color 0.3s;
-        }
-        .theme-toggle {
-            font-size: 20px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            margin-left: 20px;
-            margin-right: 25px;
-            transition: color 0.3s;
-        }
-        .left-section {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 40px;
-            text-align: center;
-            padding: 10px;
-        }
-        .left-section div {
-            margin-bottom: 10px;
-        }
-        .right-sidebar {
-            position: fixed;
-            right: 20px;
-            top: 18%;
-            transform: translateY(-25%);
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-            color: var(--text-color);
-        }
-        .right-sidebar h1 {
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-        .social-icons {
-            font-size: 20px;
-            display: flex;
-            gap: 25px;
-        }
-        .content {
-            margin-top: 70px;
-            margin-left: 120px;
-            margin-right: 50px;
-            width: 100%;
-            max-width: 900px;
-            padding: 20px;
-        }
-        section {
-            margin-bottom: 50px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .back-to-top {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--primary-color);
-            display: block;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-        .project-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .project-card h3 {
-            margin-top: 10px;
-            color: var(--primary-color);
-        }
-        .project-card p {
-            color: var(--text-color);
-        }
-        #contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        #contact-form input, 
-        #contact-form textarea {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #fff;
-            color: #333;
-            font-size: 16px;
-        }
-        #contact-form button {
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: var(--primary-color);
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #contact-form button:hover {
-            background-color: var(--hover-color);
-        }
-        @keyframes textColorChange {
-        0% { color: var(--primary-color); }
-        50% { color: var(--hover-color); }
-        100% { color: var(--primary-color); }
-    }
-
-    @keyframes textFade {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
-
-    .home-title {
-        font-size: 2em;
-        font-weight: bold;
-        text-align: center;
-        animation: textColorChange 3s infinite alternate;
-        transition: color 0.3s;
-    }
-
-    .home-title span {
-        display: inline-block;
-        animation: textFade 5s infinite;
-    }
-    #experience {
-    background-color: var(--bg-color); /* Use the theme's background color */
-    padding: 40px;
-    font-family: Arial, sans-serif;
-    color: var(--text-color); /* Ensure text color changes based on theme */
-}
-
-#experience h2 {
-    text-align: center;
-    font-size: 2rem;
-    color: var(--text-color); /* Ensure heading color changes based on theme */
-}
-
-.experience-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.experience-item {
-    margin-bottom: 30px;
-    color: var(--text-color); /* Ensure text color changes based on theme */
-}
-
-.experience-item h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color); /* Ensure primary color changes based on theme */
-}
-
-.experience-item p {
-    font-size: 1rem;
-    color: var(--text-color); /* Ensure text color changes based on theme */
-    line-height: 1.5;
-}
-
-.experience-timeline {
-    width: 100%;
-    margin-top: 30px;
-}
-
-/* .experience-timeline ul li { */
-    /* font-size: 16px; Adjust the font size */
-    /* padding: 8px 0;  Adjust the padding for spacing */
-    /* margin: 4px 0;   Adjust the margin for spacing between items */
-/* } */
-
-.timeline-item {
-    background-color: var(--bg-color); /* Ensure the background color changes with the theme */
-    color: var(--text-color); /* Ensure text color changes based on theme */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-}
-
-.timeline-item:hover {
-    transform: translateY(-10px);
-}
-
-.timeline-item h4 {
-    font-size: 1.2rem;
-    color: var(--text-color); /* Ensure text color changes based on theme */
-    margin-bottom: 10px;
-}
-
-.timeline-item h5 {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 10px;
-}
-
-.timeline-item ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.timeline-item ul li {
-    font-size: 1rem;
-    color: var(--text-color); /* Ensure text color changes based on theme */
-    margin-bottom: 5px;
-}
-
-.timeline-item ul li::before {
-    content: "✔️ ";
-    color: #28a745;
-}
-p {
-    font-size: 1.2rem; /* Larger font size */
-    line-height: 1.8; /* Increased line height for better spacing */
-}
-@media screen and (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-        height: auto; /* Ensures the header doesn't take up excess space */
-        justify-content: flex-start; /* Ensures the content starts at the top */
-    }
-
-    .left-section {
-        display: none; /* Hide left icons on small screens */
-    }
-
-    .right-sidebar {
-        position: static;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .content {
-        margin: 0 auto;
-        padding: 15px;
-        max-width: 100%;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .theme-toggle {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
-    .back-to-top {
-        bottom: 10px;
-        right: 10px;
-    }
-
-    .experience-container {
-        padding: 10px;
-    }
-}
-@media screen and (max-width: 768px) {
-    /* Preventing horizontal overflow */
-    body, html {
-        overflow-x: hidden;
-        max-width: 100%;
-    }
-
-    /* Updating header to be horizontal */
-    .header {
-        display: flex;
-        flex-direction: row; /* Horizontal alignment */
-        justify-content: space-between; /* Space between header elements */
-        align-items: center; /* Vertically center align */
-        padding: 10px;
-        width: 100%;
-    }
-
-    .left-section {
-        display: none; /* Hide left icons on small screens */
-    }
-
-    /* Right sidebar changes for better mobile view */
-    .right-sidebar {
-        position: static;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    /* Content area adjustments for mobile */
-    .content {
-        margin: 0 auto;
-        padding: 15px;
-        max-width: 100%;
-        box-sizing: border-box; /* Ensure padding doesn't exceed width */
-    }
-
-    /* Adjusting grid layout for mobile */
-    .projects-grid {
-        grid-template-columns: 1fr; /* One column grid for mobile */
-    }
-
-    /* Theme toggle adjustment */
-    .theme-toggle {
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
-    /* Back-to-top button positioning */
-    .back-to-top {
-        bottom: 10px;
-        right: 10px;
-    }
-
-    /* Experience container padding */
-    .experience-container {
-        padding: 10px;
-    }
-}
-
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-    </div>
-
-    <div class="left-section">
-        <div>🎯</div>
-        <div>👨‍💻</div>
-        <div>☕</div>
-        <div>📜</div>
-    </div>
-
-    <div class="right-sidebar">
-        <h1>Murahari Maddi</h1>
-        <p>Code. Deploy. Innovate.</p>
-        <h3>Stay Connected</h3>
-        <div class="social-icons">
-            <a href="mailto:maddimurahari12@gmail.com">📧</a>
-            <a href="https://www.linkedin.com/in/murahari-maddi/" target="_blank">🔗</a>
-            <a href="https://github.com/MurahariMaddi" target="_blank">🐙</a>
-            <a href="https://medium.com/@muraharimaddi" target="_blank">📝</a>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Murahari Portfolio</title>
+        <link rel="icon" type="image/png" href="Images/Portfolio.png" />
+        <style>
+            :root {
+                --bg-color: #0d1117;
+                --text-color: #c9d1d9;
+                --primary-color: #58a6ff;
+                --hover-color: #1f6feb;
+            }
+            .light-theme {
+                --bg-color: #ffffff;
+                --text-color: #0d1117;
+                --primary-color: #007bff;
+                --hover-color: #0056b3;
+            }
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background: var(--bg-color);
+                color: var(--text-color);
+                transition: background 0.3s, color 0.3s;
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+            }
+            .header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: var(--bg-color);
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 15px 20px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+            .header h1 {
+                color: var(--primary-color);
+                font-size: 2em;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                margin: 0 20px 0 0;
+            }
+            .header a {
+                text-decoration: none;
+                color: var(--primary-color);
+                font-size: 16px;
+                font-weight: bold;
+                margin-left: 20px;
+                transition: color 0.3s;
+            }
+            .theme-toggle {
+                font-size: 20px;
+                cursor: pointer;
+                background: none;
+                border: none;
+                color: var(--primary-color);
+                margin-left: 20px;
+                margin-right: 25px;
+                transition: color 0.3s;
+            }
+            .left-section {
+                position: fixed;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 40px;
+                text-align: center;
+                padding: 10px;
+            }
+            .left-section div {
+                margin-bottom: 10px;
+            }
+            .right-sidebar {
+                position: fixed;
+                right: 20px;
+                top: 18%;
+                transform: translateY(-5%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+                color: var(--text-color);
+                text-align: center;
+            }
+            .sidebar-image {
+                width: 100%;
+                max-width: 200px;
+                border-radius: 10px;
+                margin: 10px 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .social-icons {
+                font-size: 20px;
+                display: flex;
+                gap: 25px;
+            }
+            .content {
+                margin-top: 70px;
+                margin-left: 120px;
+                margin-right: 50px;
+                width: 100%;
+                max-width: 900px;
+                padding: 20px;
+            }
+            section {
+                margin-bottom: 50px;
+                padding: 30px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 10px;
+                transition: transform 0.3s;
+            }
+            .back-to-top {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--primary-color);
+                display: block;
+            }
+            footer {
+                text-align: center;
+                padding: 10px;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                position: relative;
+                bottom: 0;
+                width: 100%;
+            }
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            .project-card {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+            }
+            .project-card img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+            .project-card h3 {
+                margin-top: 10px;
+                color: var(--primary-color);
+            }
+            .project-card p {
+                color: var(--text-color);
+            }
+            #contact-form {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            #contact-form input,
+            #contact-form textarea {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background: #fff;
+                color: #333;
+                font-size: 16px;
+            }
+            #contact-form button {
+                padding: 12px;
+                border: none;
+                border-radius: 5px;
+                background-color: var(--primary-color);
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            #contact-form button:hover {
+                background-color: var(--hover-color);
+            }
+            @keyframes textColorChange {
+                0% {
+                    color: var(--primary-color);
+                }
+                50% {
+                    color: var(--hover-color);
+                }
+                100% {
+                    color: var(--primary-color);
+                }
+            }
+            @keyframes textFade {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0;
+                }
+            }
+            .home-title {
+                font-size: 2em;
+                font-weight: bold;
+                text-align: center;
+                animation: textColorChange 3s infinite alternate;
+                transition: color 0.3s;
+            }
+            .home-title span {
+                display: inline-block;
+                animation: textFade 5s infinite;
+            }
+            #experience {
+                background-color: var(--bg-color);
+                padding: 40px;
+                font-family: Arial, sans-serif;
+                color: var(--text-color);
+            }
+            #experience h2 {
+                text-align: center;
+                font-size: 2rem;
+                color: var(--text-color);
+            }
+            .experience-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .experience-item {
+                margin-bottom: 30px;
+                color: var(--text-color);
+            }
+            .experience-item h3 {
+                font-size: 1.5rem;
+                color: var(--primary-color);
+            }
+            .experience-item p {
+                font-size: 1rem;
+                color: var(--text-color);
+                line-height: 1.5;
+            }
+            .experience-timeline {
+                width: 100%;
+                margin-top: 30px;
+            }
+            .timeline-item {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                transition: transform 0.3s ease;
+            }
+            .timeline-item:hover {
+                transform: translateY(-10px);
+            }
+            .timeline-item h4 {
+                font-size: 1.2rem;
+                color: var(--text-color);
+                margin-bottom: 10px;
+            }
+            .timeline-item h5 {
+                font-size: 1rem;
+                color: #777;
+                margin-bottom: 10px;
+            }
+            .timeline-item ul {
+                list-style-type: none;
+                padding: 0;
+            }
+            .timeline-item ul li {
+                font-size: 1rem;
+                color: var(--text-color);
+                margin-bottom: 5px;
+            }
+            .timeline-item ul li::before {
+                content: "✔️ ";
+                color: #28a745;
+            }
+            p {
+                font-size: 1.2rem;
+                line-height: 1.8;
+            }
+            @media screen and (max-width: 768px) {
+                /* Prevent horizontal scrollbar */
+                body,
+                html {
+                    overflow-x: hidden;
+                    width: 100%;
+                }
+                /* Header adjustments */
+                .header {
+                    flex-direction: column; /* Stack header elements vertically */
+                    align-items: flex-start; /* Align items to the left */
+                    padding: 10px;
+                    height: auto;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                    z-index: 1000;
+                    background: var(--bg-color);
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                    box-sizing: border-box; /* Ensure padding is included in width */
+                }
+                .header h1 {
+                    font-size: 1.5em; /* Smaller font size for the title */
+                    margin: 0 0 5px 0; /* Reduced margin below the title */
+                    white-space: nowrap; /* Prevent title from wrapping */
+                }
+                .header nav {
+                    display: flex;
+                    flex-wrap: wrap; /* Allow links to wrap to the next line */
+                    gap: 8px; /* Space between links */
+                }
+                .header a {
+                    font-size: 12px; /* Smaller font size for links */
+                    margin-left: 0; /* Remove left margin */
+                    white-space: nowrap; /* Prevent links from wrapping */
+                }
+                .theme-toggle {
+                    font-size: 16px; /* Smaller icon size */
+                    margin-left: 0; /* Remove left margin */
+                    margin-top: 5px; /* Reduced margin above the toggle */
+                }
+                /* Hide left section on mobile */
+                .left-section {
+                    display: none;
+                }
+                /* Right sidebar adjustments */
+                .right-sidebar {
+                    position: static;
+                    margin-top: 180px; /* Reduced margin to avoid header overlap */
+                    text-align: center;
+                    padding: 10px;
+                    box-sizing: border-box; /* Ensure padding is included in width */
+                }
+                .sidebar-image {
+                    max-width: 150px;
+                    margin: 10px auto; /* Center the image */
+                }
+                .social-icons {
+                    gap: 10px; /* Reduced gap between icons */
+                }
+                /* Content adjustments */
+                .content {
+                    margin: 100px 10px 20px 10px; /* Reduced margin to avoid header overlap */
+                    padding: 10px;
+                    width: calc(100% - 20px); /* Ensure content fits within the screen */
+                    box-sizing: border-box;
+                }
+                section {
+                    padding: 15px;
+                    margin-bottom: 20px;
+                }
+                /* Back-to-top button adjustments */
+                .back-to-top {
+                    bottom: 10px;
+                    right: 10px;
+                    font-size: 18px;
+                }
+                /* Experience section adjustments */
+                .experience-container {
+                    padding: 10px;
+                }
+                .timeline-item {
+                    padding: 10px;
+                }
+                .timeline-item h4 {
+                    font-size: 1rem;
+                }
+                .timeline-item h5 {
+                    font-size: 0.8rem;
+                }
+                .timeline-item ul li {
+                    font-size: 0.8rem;
+                }
+                /* Contact form adjustments */
+                #contact-form input,
+                #contact-form textarea {
+                    font-size: 14px;
+                    width: 100%; /* Ensure inputs take full width */
+                    box-sizing: border-box; /* Include padding in width */
+                }
+                #contact-form button {
+                    font-size: 14px;
+                    padding: 10px;
+                    width: 100%; /* Full-width button */
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Body content remains unchanged -->
+        <div class="header">
+            <h1>Murahari Maddi</h1>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
-    </div>
-
-    <div class="content">
-        <section id="home">
-            <h1 class="home-title">
-                <span>Welcome to My Digital Playground</span>
-            </h1>
-        </section>
-        
-        <section id="about">
-            <h2>Who I Am</h2>
-            <p>Hey there! I’m a passionate Java Full Stack Developer who thrives on building scalable, responsive, and innovative software solutions. I specialize in modern frameworks, cloud integration, and microservices, with a strong focus on technologies like Java 18, Spring Boot, ReactJS, and AWS. My goal is to leverage technology to craft meaningful user experiences and solve real-world challenges, always aiming for performance, efficiency, and elegance in every project I take on.</p>
-        </section>        
-        <section id="skills">
-            <h2>Skills</h2>
-            <p><strong>Programming Languages:</strong> Java (8+), SQL</p>
-            <p><strong>Backend Technologies:</strong> Spring Boot, Microservices, Hibernate, RESTful APIs</p>
-            <p><strong>Frontend Technologies:</strong> HTML, CSS, JavaScript, React, Angular</p>
-            <p><strong>Cloud & DevOps:</strong> AWS, Docker, Kubernetes</p>
-            <p><strong>Databases:</strong> Oracle, MySQL, MongoDB</p>
-            <p><strong>Build & CI/CD Tools:</strong> Maven, Jenkins, Git</p>
-            <p><strong>Testing & Monitoring:</strong> JUnit, Selenium, Postman, Mockito</p>
-        </section>
-
-        <section id="experience">
-            <h2>Experience</h2>
-            <div class="experience-container">
-                <div class="experience-item">
-                    <h3>Delivering End-to-End Solutions Across the Full Software Development Lifecycle</h3>
-                    <p>Building scalable, high-performance web applications across various industries. Passionate about leveraging the latest technologies to create meaningful user experiences.</p>
-                </div>
-                <div class="experience-timeline">
-                    <div class="timeline-item">
-                        <h4>Java Full Stack Developer | Dell, MA</h4>
-                        <p><strong>June 2023 - Present</strong></p>
-                        
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Java Full Stack Developer | Evernorth, Austin, TX</h4>
-                        <p><strong>April 2021 - May 2023</strong></p>
-                        
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Java Full Stack Developer | Health Mart Systems Inc., San Francisco, CA</h4>
-                        <p><strong>January 2020 - March 2021</strong></p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Java Full Stack Developer | Bank of The West, San Francisco, CA</h4>
-                        <p><strong>June 2018 - November 2019</strong></p>
-                    </div>
-                    <div class="timeline-item">
-                        <h4>Java Full Stack Developer Intern | Tvisha Technologies, Hyderabad, IN</h4>
-                        <p><strong>April 2016 - June 2018</strong></p>
-                    </div>
-                </div>
+        <div class="left-section">
+            <div>🎯</div>
+            <div>👨‍💻</div>
+            <div>☕</div>
+            <div>📜</div>
+        </div>
+        <div class="right-sidebar">
+            <img src="Images/MMH.jpg" alt="Murahari Banner" class="sidebar-image">
+            <img src="MMH.jpg" alt="Murahari Banner" class="sidebar-image" />
+            <p>Code. Deploy. Innovate.</p>
+            <h3>Stay Connected</h3>
+            <div class="social-icons">
+                <a href="mailto:maddimurahari12@gmail.com">📧</a>
+            	<a href="https://www.linkedin.com/in/murahari-maddi/" target="_blank">🔗</a>
+            	<a href="https://github.com/MurahariMaddi" target="_blank">🐙</a>
+            	<a href="https://medium.com/@muraharimaddi" target="_blank">📝</a>
             </div>
-        </section>
-
-        <section id="education">
-            <h2>Education</h2>
-            <p><strong>Master of Science in Computer Science</strong><br>
+        </div>
+        <div class="content">
+            <section id="home">
+                <h1 class="home-title">
+                    <span>Welcome to My Digital Playground</span>
+                </h1>
+            </section>
+            <section id="about">
+                <h2>Who I Am</h2>
+                <p>
+                    Hey there! I’m a passionate Java Full Stack Developer who thrives on building scalable, responsive, and innovative software solutions. I specialize in modern frameworks, cloud integration, and microservices, with a
+                    strong focus on technologies like Java, Spring Boot, ReactJS, and AWS. My goal is to leverage technology to craft meaningful user experiences and solve real world challenges, always aiming for performance, efficiency,
+                    and elegance in every project I take on.
+                </p>
+            </section>
+            <section id="skills">
+                <h2>Skills</h2>
+                <p><strong>Programming Languages:</strong> Java (8+), SQL</p>
+                <p><strong>Backend Technologies:</strong> Spring Boot, Microservices, Hibernate, RESTful APIs</p>
+                <p><strong>Frontend Technologies:</strong> HTML, CSS, JavaScript, React, Angular</p>
+                <p><strong>Cloud & DevOps:</strong> AWS, Docker, Kubernetes</p>
+                <p><strong>Databases:</strong> Oracle, MySQL, MongoDB</p>
+                <p><strong>Build & CI/CD Tools:</strong> Maven, Jenkins, Git</p>
+                <p><strong>Testing & Monitoring:</strong> JUnit, Selenium, Postman, Mockito</p>
+            </section>
+            <section id="experience">
+                <h2>Experience</h2>
+                <div class="experience-container">
+                    <div class="experience-item">
+                        <h3>Delivering End-to-End Solutions Across the Full Software Development Lifecycle</h3>
+                        <p>Building scalable, high-performance web applications across various industries. Passionate about leveraging the latest technologies to create meaningful user experiences.</p>
+                    </div>
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <h4>Java Full Stack Developer | Dell, MA</h4>
+                            <p><strong>June 2023 - Present</strong></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Java Full Stack Developer | Evernorth, Austin, TX</h4>
+                            <p><strong>April 2021 - May 2023</strong></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Java Full Stack Developer | Health Mart Systems Inc., San Francisco, CA</h4>
+                            <p><strong>January 2020 - March 2021</strong></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Java Full Stack Developer | Bank of The West, San Francisco, CA</h4>
+                            <p><strong>June 2018 - November 2019</strong></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Java Full Stack Developer Intern | Tvisha Technologies, Hyderabad, IN</h4>
+                            <p><strong>April 2016 - June 2018</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="education">
+                <h2>Education</h2>
+                <p><strong>Master of Science in Computer Science</strong><br>
                 Clark University | Graduated in December 2024</p>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact">
-            <div class="section-content">
-                <h2>Contact</h2>
-                <form id="contact-form" action="https://formspree.io/f/mpwqrabl" method="POST">    
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-    <p>© 2025 Murahari Maddi</p>
-    <div class="back-to-top" onclick="scrollToTop()">⬆️</div>
-</footer>
-
-    <script>
-        function toggleTheme() {
-    const body = document.body;
-    const button = document.querySelector('.theme-toggle');
-
-    // Toggle light-theme class
-    body.classList.toggle("light-theme");
-
-    // Change the icon based on the theme
-    if (body.classList.contains("light-theme")) {
-        button.textContent = "☀️";  // Light theme icon
-    } else {
-        button.textContent = "🌙";  // Dark theme icon
-    }
-}
-        function scrollToTop() {
-            window.scrollTo(0, 0);
-        }
-    </script>
-
-</body>
+            </section>
+            <section id="contact">
+                <div class="section-content">
+                    <h2>Contact</h2>
+                    <form id="contact-form" action="https://formspree.io/f/mpwqrabl" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required />
+                        <input type="email" name="email" placeholder="Your Email" required />
+                        <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <footer>
+            <p>© 2025 Murahari Maddi</p>
+            <div class="back-to-top" onclick="scrollToTop()">⬆️</div>
+        </footer>
+        <script>
+            function toggleTheme() {
+                const body = document.body;
+                const button = document.querySelector(".theme-toggle");
+                body.classList.toggle("light-theme");
+                button.textContent = body.classList.contains("light-theme") ? "☀️" : "🌙";
+            }
+            function scrollToTop() {
+                window.scrollTo(0, 0);
+            }
+        </script>
+    </body>
 </html>
